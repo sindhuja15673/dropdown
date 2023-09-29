@@ -27,7 +27,7 @@ const App = () => {
         placeholder="Search for a city"
       />
       
-      {searchText && filteredCities.length > 0 && (
+      {filteredCities.length > 0 && (
         
         <div className="dropdown">
           
