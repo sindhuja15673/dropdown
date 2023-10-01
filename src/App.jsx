@@ -5,7 +5,11 @@ const cities = ['Ariyalur','bangalore','bombay', 'cuddalore', 'chennai','coimbat
 const App = () => {
   const [searchText, setSearchText] = useState('');
   const [filteredCities, setFilteredCities] = useState([]);
+  const [isInputClicked, setIsInputClicked] = useState(false);
 
+  const onClickInputHandler = () => {
+    setIsInputClicked(true);
+  }
   const onChangeHandler = (e) => {
     const inputText = e.target.value;
     setSearchText(inputText);
@@ -24,24 +28,23 @@ const App = () => {
       <input
         value={searchText}
         onChange={onChangeHandler}
+        onClick={onClickInputHandler}
         placeholder="Search for a city"
       />
-      
-      {filteredCities.length > 0 && (
-        
+      {isInputClicked && (
         <div className="dropdown">
-          
-            
-            {filteredCities.map((element, idx) => (
+          {filteredCities.length > 0 ? (
+            filteredCities.map((element, idx) => (
               <option key={idx} onClick={() => setSearchText(element)}> 
                 {element}
-             </option>
-            ))}
-          
-         
-          
+              </option>
+            ))
+          ) : (
+            <div>No matching cities found</div>
+          )}
         </div>
       )}
+      
     </>
   );
 }
